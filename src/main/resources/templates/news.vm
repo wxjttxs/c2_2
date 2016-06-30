@@ -1,0 +1,55 @@
+<html>
+<body>
+<pre>
+hello vm.
+## 你看不到我
+#*
+都看不到
+*#
+$!{value1}
+
+#foreach($color in $colors)
+Color $!{foreach.index}/$!{foreach.count}:$!{color}
+
+#end
+
+#foreach($key in $map.keySet())
+Number $!{foreach.index}/$!{foreach.count}:$!{key} $map.get($key)
+
+#end
+
+#foreach($kv in $map.entrySet())
+Number $!{foreach.index}/$!{foreach.count}:$!{kv.key} $!{kv.value}
+
+#end
+
+user1:$!{user.name}
+user2:$!{user.getName()}
+
+##包含一个文件进来
+#set($title="nowcoder")
+Include: #include("header.vm")<br>
+Parse:#parse("header.vm")
+
+##公共函数
+#macro (render_color,$color,$index)
+Color By Macro $index,$color
+#end
+
+#foreach($color in $colors)
+    #render_color($color,$foreach.index)
+
+#end
+
+#set($hello="hello")
+##双引号才会替换
+#set($hworld1="$!{hello} world")
+#set($hworld2='$!{hello} world')
+
+hworld1:$hworld1
+hworld2:$hworld2
+
+$!{colors.size()}
+</pre>
+</body>
+</html>
